@@ -55,10 +55,16 @@ public class PhotoSearchPresenter extends BasePresenter<PhotoSearchView> {
             public void onError(Throwable error) {
                 if (!isViewAttached())
                     return;
-                if (loadMore)
+                if (loadMore) {
                     view().hideLoadMoreLoading();
-                else
-                    view().showError(((FlickerException) error).getErrorMessage());
+                } else {
+                    FlickerException flickerException = (FlickerException) error;
+                    if (flickerException.getErrorCode() == FlickerException.NO_DATA_ERROR) {
+                        view().noDataFound();
+                    } else {
+                        view().showError(flickerException.getErrorMessage());
+                    }
+                }
             }
         });
     }

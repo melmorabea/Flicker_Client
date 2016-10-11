@@ -47,6 +47,7 @@ public class RxSubscriptionsHelper {
      */
     void clear() {
         compositeSubscription.unsubscribe();
+        compositeSubscription = new CompositeSubscription();
     }
 
 }

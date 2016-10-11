@@ -82,6 +82,7 @@ public class PhotoSearchFragment extends MvpFragment<PhotoSearchPresenter> imple
     @Override
     public void onDetach() {
         super.onDetach();
+        progressDialogHelper.hide();
         recyclerView.setAdapter(null); // working around potential RecyclerView bug
     }
 
@@ -99,9 +100,9 @@ public class PhotoSearchFragment extends MvpFragment<PhotoSearchPresenter> imple
             showRecyclerView();
             adapter.setListener(this);
             recyclerView.setAdapter(adapter);
-        }
-        if (lastSearchQuery != null)
+        } else if (lastSearchQuery != null) {
             presenter().searchPhotos(lastSearchQuery);
+        }
     }
 
     @Override
@@ -153,7 +154,14 @@ public class PhotoSearchFragment extends MvpFragment<PhotoSearchPresenter> imple
     }
 
     @Override
+    public void noDataFound() {
+        adapter = null;
+        showError(getString(R.string.no_data_found));
+    }
+
+    @Override
     public void showError(String error) {
+        adapter = null;
         recyclerView.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
         progressDialogHelper.hide();

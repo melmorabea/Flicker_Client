@@ -22,6 +22,8 @@ public interface PhotoSearchView extends MvpView {
 
     void hideLoadMoreLoading();
 
+    void noDataFound();
+
     void showError(String error);
 
 }
