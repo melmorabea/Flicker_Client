@@ -2,6 +2,7 @@ package com.mobiquity.flicker.photosearch.model.dto;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.VisibleForTesting;
 
 /**
  * Created by mahmoudelmorabea on 11/10/16.
@@ -84,6 +85,11 @@ public class Photo implements Parcelable {
 
     public String getUrl() {
         return "https://farm" + farm + ".staticflickr.com/" + server + "/" + id + "_" + secret + ".jpg";
+    }
+
+    @VisibleForTesting
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override

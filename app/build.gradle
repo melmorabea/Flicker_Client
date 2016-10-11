@@ -37,6 +37,7 @@ android {
 }
 
 ext {
+    espressoVersion = '2.2.2'
     supportLibVersion = '24.2.1'
     butterKnifeVersion = '8.4.0'
     daggerVersion = '2.7'
@@ -45,9 +46,15 @@ ext {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    // Espresso
+    androidTestCompile("com.android.support.test.espresso:espresso-core:${espressoVersion}", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    androidTestCompile ("com.android.support.test.espresso:espresso-contrib:${espressoVersion}") {
+        exclude group: 'com.android.support'
+    }
+    compile "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}"
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:${espressoVersion}"
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.1.0-RC.2'

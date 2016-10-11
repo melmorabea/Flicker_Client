@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
-import rx.Scheduler;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
@@ -32,9 +31,6 @@ public class PhotoSearchPresenterTest {
 
     @Mock
     PhotosRepo photosRepo;
-
-    @Mock
-    Scheduler scheduler;
 
     private PhotoSearchPresenter presenter;
 

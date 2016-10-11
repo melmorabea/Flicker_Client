@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.test.espresso.idling.CountingIdlingResource;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -33,9 +34,9 @@ import butterknife.ButterKnife;
 public class PhotoSearchFragment extends MvpFragment<PhotoSearchPresenter> implements PhotoSearchView,
         RecyclerViewClickListener<Photo> {
 
+    private CountingIdlingResource idlingResource;
 
-//    @BindView(R.id.query_edit_text)
-//    EditText editText;
+
     @BindView(R.id.photo_search_recycler)
     RecyclerView recyclerView;
     @BindView(R.id.photo_search_progress)
@@ -57,6 +58,9 @@ public class PhotoSearchFragment extends MvpFragment<PhotoSearchPresenter> imple
     public void onAttach(Context context) {
         super.onAttach(context);
         progressDialogHelper = new ProgressDialogHelper();
+        if (context instanceof PhotoSearchActivity) {
+            idlingResource = ((PhotoSearchActivity) context).getIdlingResource();
+        }
     }
 
     @Nullable
@@ -103,6 +107,7 @@ public class PhotoSearchFragment extends MvpFragment<PhotoSearchPresenter> imple
     @Override
     public void showPhotos(List<Photo> photos, boolean loadMore) {
         showRecyclerView();
+        idlingResource.decrement();
 
         if (adapter == null || !loadMore) {
             adapter = new PhotoSearchAdapter(photos, this);
@@ -122,6 +127,7 @@ public class PhotoSearchFragment extends MvpFragment<PhotoSearchPresenter> imple
     @Override
     public void showLoading() {
         progressDialogHelper.show(getContext());
+        idlingResource.increment();
     }
 
     @Override
