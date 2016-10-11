@@ -37,6 +37,11 @@ This is an Android Studio project using the Gradle build system, to build this p
 - Picasso: used for image loading and caching in memory and on disk
 - LeakCanary: used for detecting memory leaks [Only in debug mode]
 - JUnit and Mockito used for unit testing and mocking dependencies in the test environment
+- Espresso and its idling resource: used for UI testing on Android, this requires either a device or an emulator
+
+## Testing
+- Unit test: or also called local tests, that are tests that run on the JVM and doesn't require Android framework classes, the app includes two examples of unit tests of the [MvpPresenter](https://github.com/melmorabea/Flicker_Client/blob/develop/app/src/main/java/com/mobiquity/flicker/core/presenter/MvpPresenter.java) for attachment and detachment of the view, [PhotoSearchPresenter](https://github.com/melmorabea/Flicker_Client/blob/develop/app/src/main/java/com/mobiquity/flicker/photosearch/presenter/PhotoSearchPresenter.java)
+- UI test: the application includes one example of running a UI test on Android using espresso and its idling resource which serves as a semaphore while background work is in progress
 
 #### More about the project
 - Application supports both orientations portairt and landscape [If you have locked orientation on your device, enable it to try it out :)]
