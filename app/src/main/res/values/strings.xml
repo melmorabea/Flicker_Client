@@ -4,5 +4,6 @@
     <!-- Search photos -->
     <string name="search_photos_menu_title">Search</string>
     <string name="search_photos_hint">search_photos_hint</string>
+    <string name="search_photo_empty_text">Start searching for photos using the search button!</string>
 
 </resources>

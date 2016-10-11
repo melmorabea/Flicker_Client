@@ -47,6 +47,11 @@ public class PhotoSearchAdapter extends RecyclerView.Adapter<PhotoSearchViewHold
         return photos == null ? 0 : photos.size();
     }
 
+    @Override
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        listener = null;
+    }
 
     public void addItems(List<Photo> newPhotos) {
         int startPos = photos.size();

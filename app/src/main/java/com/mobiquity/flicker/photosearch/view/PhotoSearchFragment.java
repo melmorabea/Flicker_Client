@@ -73,6 +73,12 @@ public class PhotoSearchFragment extends MvpFragment<PhotoSearchPresenter> imple
         super.onViewCreated(view, savedInstanceState);
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        recyclerView.setAdapter(null); // working around potential RecyclerView bug
+    }
+
     private void initView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -84,6 +90,7 @@ public class PhotoSearchFragment extends MvpFragment<PhotoSearchPresenter> imple
             }
         });
         if (adapter != null) {
+            showRecyclerView();
             recyclerView.setAdapter(adapter);
         }
     }
@@ -95,10 +102,7 @@ public class PhotoSearchFragment extends MvpFragment<PhotoSearchPresenter> imple
 
     @Override
     public void showPhotos(List<Photo> photos, boolean loadMore) {
-        recyclerView.setVisibility(View.VISIBLE);
-        progressDialogHelper.hide();
-        progressBar.setVisibility(View.GONE);
-        errorTextView.setVisibility(View.GONE);
+        showRecyclerView();
 
         if (adapter == null || !loadMore) {
             adapter = new PhotoSearchAdapter(photos, this);
@@ -106,6 +110,13 @@ public class PhotoSearchFragment extends MvpFragment<PhotoSearchPresenter> imple
         } else {
             adapter.addItems(photos);
         }
+    }
+
+    private void showRecyclerView() {
+        recyclerView.setVisibility(View.VISIBLE);
+        progressDialogHelper.hide();
+        progressBar.setVisibility(View.GONE);
+        errorTextView.setVisibility(View.GONE);
     }
 
     @Override

@@ -12,15 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        tools:listitem="@layout/photo_search_list_item"/>
+        tools:listitem="@layout/photo_search_list_item"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/photo_search_error_text_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:visibility="gone"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:text="@string/search_photo_empty_text"/>
 
     <ProgressBar
         android:id="@+id/photo_search_progress"
