@@ -35,6 +35,13 @@ public class PhotoDetailsFragment extends MvpFragment<PhotoDetailsPresenter> imp
     private Photo photo;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null)
+            photo = savedInstanceState.getParcelable("photo");
+    }
+
+    @Override
     public void onAttach(Context context) {
         extractPhoto(getActivity());
         super.onAttach(context);
@@ -79,4 +86,9 @@ public class PhotoDetailsFragment extends MvpFragment<PhotoDetailsPresenter> imp
         PicassoHelper.loadImage(getContext(), photo.getUrl(), imageView);
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("photo", photo);
+    }
 }

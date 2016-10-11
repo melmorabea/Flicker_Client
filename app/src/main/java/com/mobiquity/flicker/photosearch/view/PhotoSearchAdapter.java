@@ -53,6 +53,10 @@ public class PhotoSearchAdapter extends RecyclerView.Adapter<PhotoSearchViewHold
         listener = null;
     }
 
+    public void setListener(RecyclerViewClickListener<Photo> listener) {
+        this.listener = listener;
+    }
+
     public void addItems(List<Photo> newPhotos) {
         int startPos = photos.size();
         photos.addAll(newPhotos);
@@ -76,7 +80,8 @@ public class PhotoSearchAdapter extends RecyclerView.Adapter<PhotoSearchViewHold
             itemView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onItemClicked(v, photo);
+                    if (listener != null)
+                        listener.onItemClicked(v, photo);
                 }
             });
         }

@@ -44,7 +44,7 @@ public class PhotoSearchFragment extends MvpFragment<PhotoSearchPresenter> imple
     @BindView(R.id.photo_search_error_text_view)
     TextView errorTextView;
 
-
+    private String lastSearchQuery;
     private ProgressDialogHelper progressDialogHelper;
     private PhotoSearchAdapter adapter;
 
@@ -52,6 +52,8 @@ public class PhotoSearchFragment extends MvpFragment<PhotoSearchPresenter> imple
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        if (savedInstanceState != null)
+            lastSearchQuery = savedInstanceState.getString("query");
     }
 
     @Override
@@ -95,8 +97,11 @@ public class PhotoSearchFragment extends MvpFragment<PhotoSearchPresenter> imple
         });
         if (adapter != null) {
             showRecyclerView();
+            adapter.setListener(this);
             recyclerView.setAdapter(adapter);
         }
+        if (lastSearchQuery != null)
+            presenter().searchPhotos(lastSearchQuery);
     }
 
     @Override
@@ -157,6 +162,7 @@ public class PhotoSearchFragment extends MvpFragment<PhotoSearchPresenter> imple
     }
 
     public void onSearchTriggered(String queryString) {
+        lastSearchQuery = queryString;
         presenter().searchPhotos(queryString);
     }
 
@@ -166,4 +172,10 @@ public class PhotoSearchFragment extends MvpFragment<PhotoSearchPresenter> imple
             .putExtra("photo", model));
     }
 
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("query", lastSearchQuery);
+    }
 }
