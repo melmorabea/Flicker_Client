@@ -71,7 +71,7 @@ public class PhotoSearchPresenterTest {
         Mockito.verify(view).showLoading();
         Mockito.verify(photosRepo).searchForPhotos(ArgumentMatchers.any(String.class),
                 ArgumentMatchers.any(Integer.class));
-        Mockito.verify(view).showError(ArgumentMatchers.anyString());
+        Mockito.verify(view).noDataFound();
     }
 
     @Test
@@ -87,7 +87,7 @@ public class PhotoSearchPresenterTest {
         Mockito.verify(view).showLoading();
         Mockito.verify(photosRepo).searchForPhotos(ArgumentMatchers.any(String.class),
                 ArgumentMatchers.any(Integer.class));
-        Mockito.verify(view).showError(ArgumentMatchers.anyString());
+        Mockito.verify(view).noDataFound();
     }
 
     @Test
