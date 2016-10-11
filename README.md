@@ -39,6 +39,7 @@ This is an Android Studio project using the Gradle build system, to build this p
 - JUnit and Mockito used for unit testing and mocking dependencies in the test environment
 
 #### More about the project
+- Application supports both orientations portairt and landscape [If you have locked orientation on your device, enable it to try it out :)]
 - Product flavors is used to inject the constants values that needs to be altered by flavor, like base URLs and API keys [We only have one flavor now, but adding more flavors with different values would be seamless to the application]
 - Gradle properties extensions is used to define common third libraies versions to avoid conflicts and for easy version updating
 - Debug mode is used to add logging for Retrofit requests, Picasso image loading, and image source indicators [little color on top left of images to show the source whether network, disk or memory] and also activiating the memory leaking tracking by LeakCanary
