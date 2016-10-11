@@ -20,6 +20,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//        jackOptions {
+//            enabled true
+//        }
     }
     buildTypes {
         release {
@@ -27,11 +30,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
+
+    productFlavors {
+        acc {
+            buildConfigField "String", "flickr_api_key", "\"e454c8b5917a31a5acd1ba7f9b28b534\""
+            buildConfigField "String", "base_url", "\"https://api.flickr.com/services/rest/\""
+        }
+    }
 }
 
 ext {
     supportLibVersion = '24.2.1'
-    butterKnifeVersion = '8.2.1'
+    butterKnifeVersion = '8.4.0'
     daggerVersion = '2.7'
     leakCanaryVersion = '1.5'
 }
@@ -41,7 +55,9 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
     testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:2.1.0-RC.2'
 
     // Support libraries
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
@@ -59,6 +75,7 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
 
     // RxJava
     compile 'io.reactivex:rxandroid:1.2.0'

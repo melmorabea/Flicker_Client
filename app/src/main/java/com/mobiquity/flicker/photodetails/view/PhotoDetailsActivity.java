@@ -1,13 +1,15 @@
-package com.mobiquity.flicker;
+package com.mobiquity.flicker.photodetails.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.mobiquity.flicker.R;
+
+public class PhotoDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_photo_details);
     }
 }
